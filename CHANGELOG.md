@@ -8,17 +8,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
+- allow commit message as a parameter in update-changelog script
 - update-changelog  with more options
 - enhance update-changelog script to support additional commit types and improve changelog
 - fix: updating changelog
 
 ### Added
+- new feature
+- new feature
+- new feature
+- new feature
+- new feature
+- tasks.json for auto changelog with commit
 - Initial fork from OpenManus
 - Created Python virtual environment setup
 - Streamlined README.md for fork-specific information
 
 ### Changed
-- changed: enhance update-changelog script to support additional commit types and improve changelog
 - Simplified installation process to focus on venv
 - Updated configuration instructions
 

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
+- new feature
 - test1
 - allow commit message as a parameter in update-changelog script
 - update-changelog  with more options

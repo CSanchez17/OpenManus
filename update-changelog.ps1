@@ -7,8 +7,9 @@ if ($stagedChanges) {
     $commitMessage = Read-Host "Enter your commit message (e.g., 'feat/fix/changed/removed: description')"
 
     # Check if it's a valid commit type
-    if ($commitMessage -match '^(feat|fix|changed|removed):') {
+    if ($commitMessage -match '^(feat|fix|changed|removed):(.+)$') {
         $commitType = $matches[1]
+        $description = $matches[2].Trim()  # Get the description part and trim whitespace
 
         # Read the CHANGELOG.md file
         $changelogPath = "CHANGELOG.md"
@@ -55,8 +56,8 @@ if ($stagedChanges) {
                 $sectionIndex = $sectionContent.IndexOf($section) + $unreleasedIndex
             }
 
-            # Create the new changelog entry
-            $newEntry = "- $commitMessage"
+            # Create the new changelog entry (using only the description part)
+            $newEntry = "- $description"
 
             # Insert the new entry after the section header
             $updatedContent = $changelogContent[0..$sectionIndex] +

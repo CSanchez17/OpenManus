@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- fix: updating changelog
+### Added
+### Changed
+
 ### Added
 - Initial fork from OpenManus
 - Created Python virtual environment setup
@@ -20,9 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed unused documentation and community sections
 - Removed alternative installation methods
 
-### Fix
-
-### Feat
 
 ## [0.1.0] - 2025-03-15
 - Initial fork from OpenManus main repository

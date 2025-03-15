@@ -26,29 +26,45 @@ if ($stagedChanges) {
 
             if ($sectionIndex -ge 0) {
                 $sectionIndex += $unreleasedIndex
+            } else {
+                # Section doesn't exist, create it after [Unreleased]
+                $newSections = @()
+                if ($commitType -eq "feat") {
+                    $newSections = @("### Added", "### Changed", "### Fixed")
+                } else {
+                    $newSections = @("### Fixed", "### Added", "### Changed")
+                }
 
-                # Create the new changelog entry
-                $newEntry = "- $commitMessage"
+                # Insert new sections after [Unreleased]
+                $updatedContent = $changelogContent[0..$unreleasedIndex] +
+                                "" +  # Empty line after [Unreleased]
+                                $newSections +
+                                $changelogContent[($unreleasedIndex + 1)..$changelogContent.Length]
 
-                # Insert the new entry after the section header
-                $updatedContent = $changelogContent[0..$sectionIndex] +
-                                $newEntry +
-                                $changelogContent[($sectionIndex + 1)..$changelogContent.Length]
-
-                # Write back to the file
-                $updatedContent | Set-Content $changelogPath
-
-                # Stage the CHANGELOG.md
-                git add $changelogPath
-
-                # Commit the changes
-                git commit -m $commitMessage
-
-                Write-Host "Changelog updated and changes committed!"
+                # Update content and recalculate section index
+                $changelogContent = $updatedContent
+                $sectionContent = $changelogContent[$unreleasedIndex..$changelogContent.Length]
+                $sectionIndex = $sectionContent.IndexOf($section) + $unreleasedIndex
             }
-            else {
-                Write-Host "Could not find appropriate section in CHANGELOG.md"
-            }
+
+            # Create the new changelog entry
+            $newEntry = "- $commitMessage"
+
+            # Insert the new entry after the section header
+            $updatedContent = $changelogContent[0..$sectionIndex] +
+                            $newEntry +
+                            $changelogContent[($sectionIndex + 1)..$changelogContent.Length]
+
+            # Write back to the file
+            $updatedContent | Set-Content $changelogPath
+
+            # Stage the CHANGELOG.md
+            git add $changelogPath
+
+            # Commit the changes
+            git commit -m $commitMessage
+
+            Write-Host "Changelog updated and changes committed!"
         }
         else {
             Write-Host "Could not find [Unreleased] section in CHANGELOG.md"

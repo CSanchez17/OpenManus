@@ -9,8 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - fix: updating changelog
-### Added
-### Changed
 
 ### Added
 - Initial fork from OpenManus
@@ -18,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Streamlined README.md for fork-specific information
 
 ### Changed
+- changed: enhance update-changelog script to support additional commit types and improve changelog
 - Simplified installation process to focus on venv
 - Updated configuration instructions
 

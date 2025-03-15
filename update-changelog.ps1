@@ -4,10 +4,10 @@ $stagedChanges = git diff --cached --name-only
 # If there are staged changes
 if ($stagedChanges) {
     # Get the commit message from the user
-    $commitMessage = Read-Host "Enter your commit message (e.g., 'feat: add new feature' or 'fix: resolve issue')"
+    $commitMessage = Read-Host "Enter your commit message (e.g., 'feat/fix/changed/removed: description')"
 
-    # Check if it's a feat or fix commit
-    if ($commitMessage -match '^(feat|fix):') {
+    # Check if it's a valid commit type
+    if ($commitMessage -match '^(feat|fix|changed|removed):') {
         $commitType = $matches[1]
 
         # Read the CHANGELOG.md file
@@ -17,8 +17,16 @@ if ($stagedChanges) {
         # Find the [Unreleased] section
         $unreleasedIndex = $changelogContent.IndexOf("## [Unreleased]")
         if ($unreleasedIndex -ge 0) {
-            # Determine the appropriate section based on commit type
-            $section = if ($commitType -eq "feat") { "### Added" } else { "### Fixed" }
+            # Map commit types to changelog sections
+            $sectionMap = @{
+                'feat' = '### Added'
+                'fix' = '### Fixed'
+                'changed' = '### Changed'
+                'removed' = '### Removed'
+            }
+
+            # Get the appropriate section
+            $section = $sectionMap[$commitType]
 
             # Find the section
             $sectionContent = $changelogContent[$unreleasedIndex..$changelogContent.Length]
@@ -27,13 +35,13 @@ if ($stagedChanges) {
             if ($sectionIndex -ge 0) {
                 $sectionIndex += $unreleasedIndex
             } else {
-                # Section doesn't exist, create it after [Unreleased]
-                $newSections = @()
-                if ($commitType -eq "feat") {
-                    $newSections = @("### Added", "### Changed", "### Fixed")
-                } else {
-                    $newSections = @("### Fixed", "### Added", "### Changed")
-                }
+                # Section doesn't exist, create all sections after [Unreleased]
+                $newSections = @(
+                    "### Added",
+                    "### Changed",
+                    "### Fixed",
+                    "### Removed"
+                )
 
                 # Insert new sections after [Unreleased]
                 $updatedContent = $changelogContent[0..$unreleasedIndex] +
@@ -71,7 +79,7 @@ if ($stagedChanges) {
         }
     }
     else {
-        Write-Host "Commit message should start with 'feat:' or 'fix:'"
+        Write-Host "Commit message should start with one of: feat:, fix:, changed:, removed:"
     }
 }
 else {

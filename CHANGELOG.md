@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix: updating changelog
 
 ### Added
+- test3
 - tasks.json for auto changelog with commit
 - Initial fork from OpenManus
 - Created Python virtual environment setup

@@ -4,10 +4,10 @@ $stagedChanges = git diff --cached --name-only
 # If there are staged changes
 if ($stagedChanges) {
     # Get the commit message from the user
-    $commitMessage = Read-Host "Enter your commit message (e.g., 'feat/fix/changed/removed: description')"
+    $commitMessage = Read-Host "Enter your commit message (e.g., 'added/changed/fixed/removed: description')"
 
     # Check if it's a valid commit type
-    if ($commitMessage -match '^(feat|fix|changed|removed):(.+)$') {
+    if ($commitMessage -match '^(added|changed|fixed|removed):(.+)$') {
         $commitType = $matches[1]
         $description = $matches[2].Trim()  # Get the description part and trim whitespace
 
@@ -18,11 +18,11 @@ if ($stagedChanges) {
         # Find the [Unreleased] section
         $unreleasedIndex = $changelogContent.IndexOf("## [Unreleased]")
         if ($unreleasedIndex -ge 0) {
-            # Map commit types to changelog sections
+            # Map commit types to changelog sections (now they match exactly)
             $sectionMap = @{
-                'feat' = '### Added'
-                'fix' = '### Fixed'
+                'added' = '### Added'
                 'changed' = '### Changed'
+                'fixed' = '### Fixed'
                 'removed' = '### Removed'
             }
 
@@ -80,7 +80,7 @@ if ($stagedChanges) {
         }
     }
     else {
-        Write-Host "Commit message should start with one of: feat:, fix:, changed:, removed:"
+        Write-Host "Commit message should start with one of: added:, changed:, fixed:, removed:"
     }
 }
 else {

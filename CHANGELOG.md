@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
+- update-changelog  with more options
 - enhance update-changelog script to support additional commit types and improve changelog
 - fix: updating changelog
 

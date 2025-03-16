@@ -1,3 +1,8 @@
+"""
+This setup module is used for packaging and distributing the OpenManus project.
+It defines the package metadata, dependencies, and entry points.
+"""
+
 from setuptools import find_packages, setup
 
 

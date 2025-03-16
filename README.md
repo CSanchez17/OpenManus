@@ -6,6 +6,20 @@
 
 A fork of OpenManus focusing on [your specific focus/improvements].
 
+# OpenManus Project
+
+## Purpose
+The OpenManus project is designed to provide an all-capable AI assistant that can solve a wide range of tasks presented by users. It leverages various tools to efficiently complete complex requests, including programming, information retrieval, file processing, and web browsing.
+
+## Key Features
+- **Python Execution**: Execute Python code for system interaction, data processing, and automation tasks.
+- **File Saving**: Save content to local files, supporting various formats like txt, py, and html.
+- **Web Browsing**: Open and interact with web browsers for navigation, content extraction, and more.
+- **Web Search**: Perform web searches to retrieve up-to-date information.
+- **Task Termination**: End interactions when tasks are completed or require further user input.
+
+This project is ideal for developers looking to integrate a versatile AI assistant into their applications, providing robust support for a variety of tasks.
+
 ## Installation
 
 ### Using Python venv (Recommended)

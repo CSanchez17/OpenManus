@@ -1,3 +1,8 @@
+"""
+This module handles the execution of a flow using the Manus agent.
+It manages user input and executes the flow asynchronously.
+"""
+
 import asyncio
 import time
 
@@ -8,6 +13,14 @@ from app.logger import logger
 
 
 async def run_flow():
+    """
+    Executes a flow using the Manus agent based on user input.
+
+    Prompts the user for input, creates a flow, and processes the request.
+    Handles empty input, timeouts, and keyboard interruptions.
+
+    :return: None
+    """
     agents = {
         "manus": Manus(),
     }
